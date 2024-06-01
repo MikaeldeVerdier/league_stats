@@ -18,7 +18,7 @@ def plot_timelines(stats, name, labels, title=""):
 
 
 def plot_infos(infos, name, info_names, player_names, title=""):
-    fig, ax = plt.subplots(figsize=((1.75 + 0.25 * len(infos)) * len(player_names), 5))
+    fig, ax = plt.subplots(figsize=((4 + 0.125 * len(infos)) * len(player_names), 5))
 
     x = np.arange(len(player_names))
     width = 0.25
@@ -31,7 +31,7 @@ def plot_infos(infos, name, info_names, player_names, title=""):
         multiplier += 1
 
     ax.set_title(title)
-    ax.set_xticks(x + width / 2, player_names)
+    ax.set_xticks(x, player_names)
     ax.legend()
 
     plt.savefig(name)
