@@ -11,7 +11,7 @@ def plot_timelines(stats, name, labels, title=""):
 
     plt.title(title)
     plt.xlabel("Time")
-    plt.legend()
+    plt.legend(fontsize=8)
 
     plt.savefig(name)
     plt.close()
@@ -31,7 +31,8 @@ def plot_infos(infos, name, info_names, player_names, title=""):
         multiplier += 1
 
     ax.set_title(title)
-    ax.set_xticks(x, player_names)
+    ax.set_xticks(x)
+    ax.set_xticklabels(player_names)
     ax.legend()
 
     plt.savefig(name)

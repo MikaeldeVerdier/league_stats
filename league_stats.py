@@ -10,13 +10,14 @@ MATCH_AMOUNT = 2
 
 if __name__ == "__main__":
     summoner_info = get_summoner_info(NAME, API_KEY)  # try... except
-    assert "status" not in summoner_info, "API rate limit exceeded, please wait."
+    assert "status" not in summoner_info or summoner_info["status"]["status_code"] != 429, "API rate limit exceeded, please wait."
+    assert "status" not in summoner_info or summoner_info["status"]["status_code"] != 403, "Invalid API key."
 
-    match_ids = get_match_ids(summoner_info, MATCH_AMOUNT, API_KEY)
-    assert "status" not in match_ids, "API rate limit exceeded, please wait."
+    match_ids = get_match_ids(summoner_info, MATCH_AMOUNT, API_KEY)  # Could add something to filter by queue type.
+    assert "status" not in match_ids or summoner_info["status"]["status_code"] != 429, "API rate limit exceeded, please wait."
 
     match_infos = get_match_infos(match_ids, API_KEY)
-    assert match_infos != [], "API rate limit exceeded, please wait."
+    assert match_infos != [], "API rate limit exceeded, please wait."  # Confirm that this is API rate limit problem.
 
     match_timelines = get_match_timelines(match_ids, API_KEY)
     assert match_timelines != [], "API rate limit exceeded, please wait."
